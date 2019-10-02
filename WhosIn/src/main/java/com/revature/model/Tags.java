@@ -1,10 +1,13 @@
 package com.revature.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +21,9 @@ public class Tags {
 	
 	@Column(name="tagname")
 	private String tagname;
+	
+	@ManyToMany(targetEntity=Event.class,mappedBy="tags")
+	private Set<Event> events;
 
 	public Tags() {
 		super();
