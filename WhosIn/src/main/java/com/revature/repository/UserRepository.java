@@ -1,5 +1,11 @@
 package com.revature.repository;
 
-public interface UserRepository {
+import java.util.List;
 
+import com.revature.model.User;
+
+public interface UserRepository {
+	List<User> getAllUsers();
+	User getUserById(int id);
+	void insertUser(User u);
 }
