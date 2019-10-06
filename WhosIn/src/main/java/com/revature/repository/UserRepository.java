@@ -10,6 +10,6 @@ public interface UserRepository extends JpaRepository<User, Integer>{
 	
 	public List<User> findAll();
 	public User findById(int id);
-	public User findByUseremail(String useremail);
+	public User findByUsername(String username);
 	public <S extends User> S save(User u);
 }

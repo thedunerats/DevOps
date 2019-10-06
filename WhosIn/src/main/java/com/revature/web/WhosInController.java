@@ -33,4 +33,5 @@ public class WhosInController {
 	public User findById(@PathVariable int id) {
 		return userService.findById(id);
 	}
+	
 }

@@ -13,8 +13,8 @@ public class UserRole {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column
-	private int userroleid;
+	@Column(name="userroleid")
+	private int id;
 	
 	@Column
 	private String userrole;
@@ -26,16 +26,16 @@ public class UserRole {
 
 	public UserRole(int userroleid, String userrole) {
 		super();
-		this.userroleid = userroleid;
+		this.id = userroleid;
 		this.userrole = userrole;
 	}
 
 	public int getUserroleid() {
-		return userroleid;
+		return id;
 	}
 
 	public void setUserroleid(int userroleid) {
-		this.userroleid = userroleid;
+		this.id = userroleid;
 	}
 
 	public String getUserrole() {
@@ -51,7 +51,7 @@ public class UserRole {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((userrole == null) ? 0 : userrole.hashCode());
-		result = prime * result + userroleid;
+		result = prime * result + id;
 		return result;
 	}
 
@@ -69,14 +69,14 @@ public class UserRole {
 				return false;
 		} else if (!userrole.equals(other.userrole))
 			return false;
-		if (userroleid != other.userroleid)
+		if (id != other.id)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "UserRoles [userroleid=" + userroleid + ", userrole=" + userrole + "]";
+		return "UserRoles [userroleid=" + id + ", userrole=" + userrole + "]";
 	}
 	
 	

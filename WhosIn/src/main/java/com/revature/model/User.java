@@ -1,8 +1,5 @@
 package com.revature.model;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,8 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -24,87 +19,72 @@ public class User {
 	@Column(name="userid")
 	private int id;
 	
-	@Column(name="useremail")
-	private String useremail;
+	@Column(name="username")
+	private String username;
 	
-	@Column(name="userpassword")
-	private String userpassword;
+	@Column(name="password")
+	private String password;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="userroleid")
 	private UserRole userrole;
 	
-//	 @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//	    @JoinTable(name = "guestlist", joinColumns = @JoinColumn(name = "userid", referencedColumnName = "eventid"), 
-//	    inverseJoinColumns = @JoinColumn(name = "eventid", referencedColumnName = "userid"))
-//	  private Set<Event> events;
 
 	public User() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public User(int userid, String useremail, String userpassword, UserRole userrole/*, Set<Event> events*/) {
+	public User(int id, String username, String password, UserRole userrole) {
 		super();
-		this.id = userid;
-		this.useremail = useremail;
-		this.userpassword = userpassword;
+		this.id = id;
+		this.username = username;
+		this.password = password;
 		this.userrole = userrole;
-//		this.events = events;
 	}
-
-	public int getUserid() {
+	
+	public int getId() {
 		return id;
 	}
-
-	public void setUserid(int userid) {
-		this.id = userid;
+	
+	public void setId(int id) {
+		this.id = id;
 	}
-
-	public String getUseremail() {
-		return useremail;
+	
+	public String getUsername() {
+		return username;
 	}
-
-	public void setUseremail(String useremail) {
-		this.useremail = useremail;
+	
+	public void setUsername(String username) {
+		this.username = username;
 	}
-
-	public String getUserpassword() {
-		return userpassword;
+	
+	public String getPassword() {
+		return password;
 	}
-
-	public void setUserpassword(String userpassword) {
-		this.userpassword = userpassword;
+	
+	public void setPassword(String password) {
+		this.password = password;
 	}
-
+	
 	public UserRole getUserrole() {
 		return userrole;
 	}
-
+	
 	public void setUserrole(UserRole userrole) {
 		this.userrole = userrole;
 	}
-
-//	public Set<Event> getEvents() {
-//		return events;
-//	}
-//
-//	public void setEvents(Set<Event> events) {
-//		this.events = events;
-//	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-//		result = prime * result + ((events == null) ? 0 : events.hashCode());
-		result = prime * result + ((useremail == null) ? 0 : useremail.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((userpassword == null) ? 0 : userpassword.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		result = prime * result + ((userrole == null) ? 0 : userrole.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -114,22 +94,17 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-//		if (events == null) {
-//			if (other.events != null)
-//				return false;
-//		} else if (!events.equals(other.events))
-//			return false;
-		if (useremail == null) {
-			if (other.useremail != null)
-				return false;
-		} else if (!useremail.equals(other.useremail))
-			return false;
 		if (id != other.id)
 			return false;
-		if (userpassword == null) {
-			if (other.userpassword != null)
+		if (password == null) {
+			if (other.password != null)
 				return false;
-		} else if (!userpassword.equals(other.userpassword))
+		} else if (!password.equals(other.password))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
 			return false;
 		if (userrole == null) {
 			if (other.userrole != null)
@@ -138,12 +113,9 @@ public class User {
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "User [userid=" + id + ", useremail=" + useremail + ", userpassword=" + userpassword + ", userrole="
-				+ userrole + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", userrole=" + userrole + "]";
 	}
-
-	
 }

@@ -31,12 +31,12 @@ public class UserService {
 		return userRepository.findById(id);
 	}
 	
-	public User findByUseremail(String useremail) {
-		return userRepository.findByUseremail(useremail);
+	public User findByUsername(String username) {
+		return userRepository.findByUsername(username);
 	}
 	
 	@Autowired
-	public void setMovieRepository(UserRepository userRepository) {
+	public void setUserRepository(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
 }
