@@ -17,6 +17,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 
 @Table(name="event")
@@ -44,14 +46,15 @@ public class Event {
 	@Column(name="longitude")
 	private Double longitude;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="userid")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="eventowner")
 	private User eventowner;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "eventtags",
     joinColumns = {@JoinColumn(name = "eventid")}, 
     inverseJoinColumns = {@JoinColumn(name = "tagid")})
+	@JsonIgnore
 	private Set<Tags> tags = new HashSet<>();
 	
 
@@ -60,7 +63,7 @@ public class Event {
 	}
 
 	public Event(int id, String eventname, String eventdescription, Timestamp eventstartdate, Timestamp eventenddate,
-			Double latitude, Double longitude, User owner, Set<Tags> tags) {
+			Double latitude, Double longitude, User eventowner, Set<Tags> tags) {
 		super();
 		this.id = id;
 		this.eventname = eventname;
@@ -69,7 +72,7 @@ public class Event {
 		this.eventenddate = eventenddate;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.eventowner = owner;
+		this.eventowner = eventowner;
 		this.tags = tags;
 	}
 
@@ -129,12 +132,12 @@ public class Event {
 		this.longitude = longitude;
 	}
 
-	public User getOwner() {
+	public User getEventowner() {
 		return eventowner;
 	}
 
-	public void setOwner(User owner) {
-		this.eventowner = owner;
+	public void setEventowner(User eventowner) {
+		this.eventowner = eventowner;
 	}
 
 	public Set<Tags> getTags() {
@@ -219,7 +222,7 @@ public class Event {
 	public String toString() {
 		return "Event [id=" + id + ", eventname=" + eventname + ", eventdescription=" + eventdescription
 				+ ", eventstartdate=" + eventstartdate + ", eventenddate=" + eventenddate + ", latitude=" + latitude
-				+ ", longitude=" + longitude + ", owner=" + eventowner + ", tags=" + tags + "]";
+				+ ", longitude=" + longitude + ", eventowner=" + eventowner + ", tags=" + tags + "]";
 	}
 	
 }

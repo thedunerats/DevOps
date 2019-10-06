@@ -19,11 +19,11 @@ public class Guest {
 	@Column(name="guestid")
 	private int id;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="eventid")
 	private Event event;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="userid")
 	private User user;
 

@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 
 @Table(name="user")
@@ -23,12 +25,12 @@ public class User {
 	private String username;
 	
 	@Column(name="password")
+	@JsonIgnore
 	private String password;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="userroleid")
 	private UserRole userrole;
-	
 
 	public User() {
 		super();

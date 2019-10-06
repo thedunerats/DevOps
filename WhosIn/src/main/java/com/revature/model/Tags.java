@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 
 @Table(name="tags")
@@ -26,6 +28,7 @@ public class Tags {
 	private String tagname;
 	
 	@ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy="tags")
+	@JsonIgnore
 	private Set<Event> events = new HashSet<>();
 
 	public Tags() {
