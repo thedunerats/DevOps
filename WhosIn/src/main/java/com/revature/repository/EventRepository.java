@@ -16,11 +16,11 @@ public interface EventRepository extends JpaRepository<Event, Integer>{
 	public Event findByEventname(String eventname);
 	public <S extends Event> S save(Event e);
 	
-	@Query(value="SELECT u.username "
-			+ "FROM guest g "
-			+ "INNER JOIN \"user\" u "
-			+ "ON g.userid = u.userid "
-			+ "WHERE g.eventid = :eventid",
+	@Query(value="select u.username "
+			+ "from guest g "
+			+ "inner join \"user\" u "
+			+ "on g.userid = u.userid "
+			+ "where g.eventid = :eventid",
 			nativeQuery = true)
 	public List<String> findEventGuests(@Param("eventid") int id);
 	

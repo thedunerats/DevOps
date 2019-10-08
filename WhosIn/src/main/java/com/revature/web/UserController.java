@@ -7,10 +7,13 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.model.User;
+import com.revature.model.UserLoginRequestModel;
 import com.revature.service.UserService;
 
 @CrossOrigin
@@ -23,15 +26,18 @@ public class UserController {
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-	
-	@GetMapping(value="/all", produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<User> findAll() {
-		return userService.findAll();
+		
+	@PostMapping(value="/login", consumes=MediaType.APPLICATION_JSON_VALUE, produces=MediaType.APPLICATION_JSON_VALUE)
+	public boolean verifyLogin(@RequestBody UserLoginRequestModel loginRequest) {
+		User u = new User();
+		u.setUsername(loginRequest.getUsername());
+		u.setPassword(loginRequest.getPassword());
+		u = userService.verifyLogin(u.getUsername(),u.getPassword());
+		if(u == null) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
-	
-	@GetMapping(value="/{id}")
-	public User findById(@PathVariable int id) {
-		return userService.findById(id);
-	}
-	
 }

@@ -31,8 +31,8 @@ public class UserService {
 		return userRepository.findById(id);
 	}
 	
-	public User findByUsername(String username) {
-		return userRepository.findByUsername(username);
+	public User verifyLogin(String username, String password) {
+		return userRepository.findByUsernameAndPassword(username,password);
 	}
 	
 	@Autowired
