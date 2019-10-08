@@ -1,0 +1,38 @@
+
+    <!---Create Account Interface-->
+    <h3 class = "text-center">Making a new account? Enter your information here.</h3>
+    <form action = "../NewServlet2" method = "post" class = "container justify-content-center"> <!---This worked. Sort of.-->
+        <div class = "row">	
+                <div class="form-group col" id = "eMailBar">
+                    <label for="exampleInputEmail1">Your email address:</label>
+                    <input type="email" name = "email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+
+        </div>
+        <div class = "row">
+            <div class="form-group col">
+                <label for="exampleUserName">Your new user name:</label>
+                <input type="text" class="form-control" name = "username" id="exampleUserName" placeholder="User Name">
+            </div>
+            <div class="form-group col">
+                <label for="exampleInputPassword1">Your new password:</label>
+                <input type="password" class="form-control" name = "password" id="exampleInputPassword1" placeholder="Password">
+            </div>
+        </div>
+          <div class = "row">
+            <div class="form-group col">
+                    <label for="club">Would you like to join a club?</label>
+                    <div class="checkforClub">
+                        <label>Check the box if so.</label>
+                        <input (onChange) = "showClubRegistration()" type="checkbox" id = "club_identifier">
+                    </div>
+                    <div class = "form-group col">
+                        <input type="text" id="club_text" name="txtbox">
+                    </div>
+            </div>
+      </div> 
+        <button type="submit" class="btn btn-primary justify-content-center">Create Account</button>
+        <input type="hidden" id="custId" name="custID" value="0002">
+    </form>
+    
