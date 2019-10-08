@@ -29,12 +29,12 @@ public class EventController {
 		return eventService.findAll();
 	}
 	
-	@GetMapping(value="/id/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
 	public Event findById(@PathVariable int id) {
 		return eventService.findById(id);
 	}
 	
-	@GetMapping(value="/{eventname}",produces=MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/name/{eventname}",produces=MediaType.APPLICATION_JSON_VALUE)
 	public Event findByEventname(@PathVariable String eventname) {
 		return eventService.findByEventname(eventname);
 	}
