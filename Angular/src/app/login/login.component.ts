@@ -2,7 +2,9 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../classes/user';
 import { NgForm } from '@angular/forms'
-import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service';
+import { WebStorageService, SESSION_STORAGE } from 'angular-webstorage-service';
+import { Router } from '@angular/router';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-login',
@@ -10,11 +12,9 @@ import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  constructor(private us:UserService,@Inject(SESSION_STORAGE) private storage:WebStorageService,private router:Router) { }
 
-  constructor(private us:UserService,@Inject(SESSION_STORAGE)private storage:WebStorageService) { }
-
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   //The passedUser represents the data being entered
   //passedUser will be passed to the Java backend to be
@@ -38,9 +38,11 @@ export class LoginComponent implements OnInit {
         if(this.returnedUser != null){
           let invalid = document.getElementById("login-failed");
           invalid.style.display = "none";
-          this.storage.set("username",this.returnedUser.getUsername());
-          this.storage.set("userrole",this.returnedUser.getUserRoleId());
-          this.storage.set("loggedIn",true);
+          this.storage.set("username",this.returnedUser["username"]);
+          this.storage.set("userrole",this.returnedUser["userroleid"]);
+          this.storage.set("loggedIn","true");
+          console.log(this.storage.get("loggedIn"));
+          this.router.navigate(['app-search']);
         }
         else{
           let invalid = document.getElementById("login-failed");

@@ -1,13 +1,3 @@
-<!--<header id="app-header">
-    <div class="container">
-      <div class="topnav">
-        <a class="active" href="">Home</a>
-        <a *ngIf="loggedIn; else loginLink" href="/logout">Log Out</a>
-        <ng-template #loginLink><a href="/app-login">Log In</a></ng-template>
-        <a href="/app-search">Search</a>
-      </div>
-    </div>
-</header>-->
 <nav class="navbar navbar-expand-md bg-custom navbar-dark sticky-top">
   <!-- Brand -->
   <a class="navbar-brand" href="./">Who's In?</a>
@@ -23,7 +13,7 @@
       <li class="nav-item"><a class="nav-link" href="/app-search">Search</a></li>
     </ul>
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item"><a *ngIf="loggedIn; else loginLink" class="nav-link" href="/logout">Log Out</a></li>
+      <li class="nav-item"><a *ngIf="loggedIn; else loginLink" class="nav-link" href="/app-search" (click)="logout()">Log Out</a></li>
       <ng-template #loginLink><li class="nav-item" id="lIn"><a class="nav-link" href="/app-login">Log In</a></li></ng-template>
     </ul>
   </div>

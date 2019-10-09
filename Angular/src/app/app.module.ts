@@ -38,5 +38,5 @@ import { SearchComponent } from './search/search.component';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(@Inject(SESSION_STORAGE) storage:WebStorageService){}
+  
 }

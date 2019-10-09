@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { SESSION_STORAGE, WebStorageService } from 'angular-webstorage-service';
+import { WebStorageService, LOCAL_STORAGE, SESSION_STORAGE } from 'angular-webstorage-service';
 
 @Component({
   selector: 'app-header',
@@ -19,12 +19,18 @@ export class HeaderComponent implements OnInit {
   }
 
   loginOrLogout() {
-    if(this.storage.get("loggedIn") == true){
+    if(this.storage.get("loggedIn") === "true"){
       this.loggedIn = true;
     }
     else {
       this.loggedIn = false;
     }
+  }
+
+  logout() {
+    this.storage.set("loggedIn", "false");
+    this.storage.set("username","");
+    this.storage.set("userrole","");
   }
 
 }
