@@ -1,0 +1,17 @@
+<div class="search">
+    <input id="searchBar" (keyup)=searchInput($event) type="text" placeholder="Search..">
+    <div id="searchList">
+        {{ htmlStr }}
+        <table *ngFor="let d of data">
+            <tbody>
+                <tr>
+                    <!--CHANGED-->
+                    <td>This is a table. Again and again and again. This is table {{d}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<agm-map [zoom]="14" [latitude]="lat" [longitude]="lng">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map>
