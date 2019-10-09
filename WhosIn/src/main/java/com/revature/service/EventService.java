@@ -39,6 +39,10 @@ public class EventService {
 		return eventRepository.findEventTags(id);
 	}
 	
+	public <S extends Event> S save(Event e) {
+		return eventRepository.save(e);
+	}
+	
 	@Autowired
 	public void setEventRepository(EventRepository eventRepository) {
 		this.eventRepository = eventRepository;
