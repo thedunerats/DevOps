@@ -65,10 +65,9 @@ export class HomeComponent implements OnInit {
 
 clicking(event) {
 
-  console.log("clicked")
+  alert(event.target.id)
     
 };
-
 
 
 }

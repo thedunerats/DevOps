@@ -5,10 +5,28 @@
         <!--Below dynamically adds ID to each event "div"(technically a table)-->
         <table *ngFor="let d of data" attr.id="{{d.id}}LIST" (click)="clicking($event)">
 
+            <ng-container
+                *ngIf="(((d.eventname.toUpperCase().includes(htmlStr.toUpperCase())) || (d.eventdescription.toUpperCase().includes(htmlStr.toUpperCase()))) && htmlStr.length > 0 && htmlStr.toUpperCase() !== 'ALL EVENTS'); then caseA; else caseB">
+            </ng-container>
+            <ng-template #caseA>
 
-            <div
-                *ngIf="d.eventname.toUpperCase().includes(htmlStr.toUpperCase()) && htmlStr.length > 0 && htmlStr.toUpperCase() !== 'ALL EVENTS'">
-                
+                <tbody>
+                    <tr>
+                        <!--CHANGED-->
+                        <td>
+                            <!--This is a table. Again and again and again. This is table --> {{d.eventname}}</td>
+                    </tr>
+                </tbody>
+
+
+
+
+
+
+
+            </ng-template>
+            <ng-template #caseB>
+                <div *ngIf="htmlStr.toUpperCase() === 'ALL EVENTS'">
                     <tbody>
                         <tr>
                             <!--CHANGED-->
@@ -16,13 +34,23 @@
                                 <!--This is a table. Again and again and again. This is table --> {{d.eventname}}</td>
                         </tr>
                     </tbody>
-                
-            </div>
+                </div>
+
+
+
+
+
+
+            </ng-template>
+
         </table>
     </div>
 </div>
+
 <agm-map [zoom]="14" [latitude]="lat" [longitude]="lng">
 
-    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+    <agm-marker *ngFor="let d of data" [latitude]="d.latitude" [longitude]="d.longitude"
+        [visible]=d.eventname.toUpperCase().includes(htmlStr.toUpperCase())||d.eventdescription.toUpperCase().includes(htmlStr.toUpperCase())> </agm-marker>
 
+        
 </agm-map>
