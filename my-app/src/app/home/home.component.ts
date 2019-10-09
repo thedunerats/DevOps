@@ -2,7 +2,7 @@ import { EventService } from './../services/event.service';
 import { Component, OnInit } from '@angular/core';
 import { htmlAstToRender3Ast } from '@angular/compiler/src/render3/r3_template_transform';
 import { HttpClient } from '@angular/common/http';
-
+import { Event } from 'src/app/classes/events';
 
 @Component({
   selector: 'app-home',
@@ -21,10 +21,10 @@ export class HomeComponent implements OnInit {
   //have to include service in constructor 
   constructor(private es: EventService) { }
 
-  data: string[] = []; 
+  data: Event[] = []; 
 
   ngOnInit() {
-
+    
   }
 
 
@@ -60,5 +60,15 @@ export class HomeComponent implements OnInit {
 
 
   }
+
+
+
+clicking(event) {
+
+  console.log("clicked")
+    
+};
+
+
 
 }

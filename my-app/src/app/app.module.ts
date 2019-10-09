@@ -9,7 +9,6 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { AgmCoreModule } from '@agm/core'
 import { HttpClientModule } from '@angular/common/http';
-import { DirectivesComponent } from './directives/directives.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +16,6 @@ import { DirectivesComponent } from './directives/directives.component';
     HomeComponent,
     AboutComponent,
     ContactComponent,
-    DirectivesComponent,
     
   ],
   imports: [

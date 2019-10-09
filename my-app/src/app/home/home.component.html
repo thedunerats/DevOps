@@ -2,16 +2,27 @@
     <input id="searchBar" (keyup)=searchInput($event) type="text" placeholder="Search..">
     <div id="searchList">
         {{ htmlStr }}
-        <table *ngFor="let d of data">
-            <tbody>
-                <tr>
-                    <!--CHANGED-->
-                    <td>This is a table. Again and again and again. This is table {{d}}</td>
-                </tr>
-            </tbody>
+        <!--Below dynamically adds ID to each event "div"(technically a table)-->
+        <table *ngFor="let d of data" attr.id="{{d.id}}LIST" (click)="clicking($event)">
+
+
+            <div
+                *ngIf="d.eventname.toUpperCase().includes(htmlStr.toUpperCase()) && htmlStr.length > 0 && htmlStr.toUpperCase() !== 'ALL EVENTS'">
+                
+                    <tbody>
+                        <tr>
+                            <!--CHANGED-->
+                            <td>
+                                <!--This is a table. Again and again and again. This is table --> {{d.eventname}}</td>
+                        </tr>
+                    </tbody>
+                
+            </div>
         </table>
     </div>
 </div>
 <agm-map [zoom]="14" [latitude]="lat" [longitude]="lng">
+
     <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+
 </agm-map>
