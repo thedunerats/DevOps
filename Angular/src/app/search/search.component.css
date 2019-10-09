@@ -10,19 +10,21 @@
   }
   
   .search {
-    height: calc(100% - 48px);
-    width:25%;
     float: left;
     display: table;
+    padding-right:0px;
   }
   
   #searchList {
     overflow-y: scroll;
-    width: 50vw;
     height: 100vh;
     word-wrap: break-word;
-    font-size: 23px;
-    /* height: calc(100% - 43px); */
+    font-size: 20px;
+  }
+
+  .map {
+    padding-left: 0px;
+    height:100vh;
   }
   agm-map {
     height: 100vh;

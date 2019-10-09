@@ -35,8 +35,6 @@ export class SearchComponent implements OnInit {
     this.htmlStr = searchBar;
   }
   clicking(event) {
-
     alert(event.target.id)
-      
   };
 }

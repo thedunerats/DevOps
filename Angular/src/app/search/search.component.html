@@ -1,39 +1,40 @@
-<div class="search">
-    <input id="searchBar" (keyup)=searchInput($event) type="text" placeholder="Search..">
-    <div id="searchList">
-        {{ htmlStr }}
-        <!--Below dynamically adds ID to each event "div"(technically a table)-->
-        <table *ngFor="let d of data" attr.id="{{d.id}}LIST" (click)="clicking($event)">
+<div class="row">
+    <div class="search col-3">
+        <input id="searchBar" (keyup)=searchInput($event) type="text" placeholder="Search..">
+        <div id="searchList">
+            {{ htmlStr }}
+            <table *ngFor="let d of data" attr.id="{{d.id}}LIST" (click)="clicking($event)">
 
-            <ng-container
-                *ngIf="(((d.eventname.toUpperCase().includes(htmlStr.toUpperCase())) || (d.eventdescription.toUpperCase().includes(htmlStr.toUpperCase()))) && htmlStr.length > 0 && htmlStr.toUpperCase() !== 'ALL EVENTS'); then caseA; else caseB">
-            </ng-container>
-            <ng-template #caseA>
-
-                <tbody>
-                    <tr>
-                        <td>{{d.eventname}}</td>
-                    </tr>
-                </tbody>
-            </ng-template>
-            <ng-template #caseB>
-                <div *ngIf="htmlStr.toUpperCase() === 'ALL EVENTS'">
+                <ng-container
+                    *ngIf="(((d.eventname.toUpperCase().includes(htmlStr.toUpperCase())) || (d.eventdescription.toUpperCase().includes(htmlStr.toUpperCase()))) && htmlStr.length > 0 && htmlStr.toUpperCase() !== 'ALL EVENTS'); then caseA; else caseB">
+                </ng-container>
+                <ng-template #caseA>
                     <tbody>
                         <tr>
                             <td>{{d.eventname}}</td>
                         </tr>
                     </tbody>
-                </div>
-            </ng-template>
-        </table>
+                </ng-template>
+                <ng-template #caseB>
+                    <div *ngIf="htmlStr.toUpperCase() === 'ALL EVENTS' || htmlStr.toUpperCase() === '*'">
+                        <tbody>
+                            <tr>
+                                <td>{{d.eventname}}</td>
+                            </tr>
+                        </tbody>
+                    </div>
+                </ng-template>
+            </table>
+        </div>
+    </div>
+
+    <div class="map col-9">
+        <agm-map [zoom]="14" [latitude]="lat" [longitude]="lng">
+            <agm-marker *ngFor="let d of data" [latitude]="d.latitude" [longitude]="d.longitude"
+                [visible]=d.eventname.toUpperCase().includes(htmlStr.toUpperCase())||d.eventdescription.toUpperCase().includes(htmlStr.toUpperCase())> </agm-marker>
+        </agm-map>
     </div>
 </div>
-
-<agm-map [zoom]="14" [latitude]="lat" [longitude]="lng">
-
-    <agm-marker *ngFor="let d of data" [latitude]="d.latitude" [longitude]="d.longitude"
-        [visible]=d.eventname.toUpperCase().includes(htmlStr.toUpperCase())||d.eventdescription.toUpperCase().includes(htmlStr.toUpperCase())> </agm-marker>
-</agm-map>
 <!--
     <agm-map (mapClick)="getLatAndLong($event)" [id] = "map" [zoom]="14" [latitude]="centerlat" [longitude]="centerlng" [draggable] = "false">
     <agm-marker *ngFor="let d of data" [latitude]="d.latitude" [longitude]="d.longitude"
@@ -42,4 +43,7 @@
             <strong>test text</strong><br>
           </agm-info-window>
     </agm-map>
+
+    <div id="latclicked">{{latStr}}</div>
+    <div id="longclicked">{{longStr}}</div>
 -->
