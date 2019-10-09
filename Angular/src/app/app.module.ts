@@ -10,6 +10,7 @@ import { ContactComponent } from './contact/contact.component';
 import { AgmCoreModule } from '@agm/core'
 import { HttpClientModule } from '@angular/common/http';
 import { DirectivesComponent } from './directives/directives.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { DirectivesComponent } from './directives/directives.component';
     AboutComponent,
     ContactComponent,
     DirectivesComponent,
-    
+    LoginComponent
   ],
   imports: [
     BrowserModule,

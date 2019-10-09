@@ -18,13 +18,7 @@ export class EventService {
     constructor(private http: HttpClient) { }
 
     //Observable<Tag[]>
-    getAllTags(): Observable<string[]> {
-        console.log("test")
-        
-        return this.http.get("http://localhost:8080/event/1/tags") as Observable<string[]>;
-
-        
-
-
+    getAllTags(): Observable<Event[]> {
+        return this.http.get("http://localhost:8084/event/all") as Observable<Event[]>;
     }
 }

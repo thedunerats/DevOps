@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EventService } from 'src/app/services/event.service'
+import { Event } from 'src/app/classes/events'
+
 @Component({
   selector: 'app-directives',
   templateUrl: './directives.component.html',
@@ -13,7 +15,7 @@ export class DirectivesComponent implements OnInit {
     this.getAllTags();
   }
 
-  data: string[] = [];
+  data: Event[] = [];
 
   getAllTags() {
     this.es.getAllTags().subscribe(
