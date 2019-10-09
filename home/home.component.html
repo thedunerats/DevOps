@@ -1,0 +1,23 @@
+<div class="search">
+    <input id="searchBar" (keyup)=searchInput($event) type="text" placeholder="Search..">
+    <div id="searchList">
+        {{ htmlStr }}
+        <table *ngFor="let d of data">
+            <tbody>
+                <tr>
+                    <!--CHANGED-->
+                    <td>This is a table. Again and again and again. This is table {{d}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<agm-map (mapClick)="getLatAndLong($event)" [id] = "map" [zoom]="14" [latitude]="centerlat" [longitude]="centerlng" [draggable] = "false">
+    <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker><!---Need to populate with more markers. This one is a placeholder for now.-->
+    <agm-info-window #infoWindow> <!--Fixme: needs a listener to display infowindow when clicked. also display when moved?-->
+        <strong>test text</strong><br>
+      </agm-info-window>
+</agm-map>
+<!--latclicked and longclicked divs-->
+<div id="latclicked">{{latStr}}</div>
+<div id="longclicked">{{longStr}}</div>
