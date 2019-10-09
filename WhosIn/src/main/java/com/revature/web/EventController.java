@@ -54,4 +54,9 @@ public class EventController {
 	public Event insertEvent(Event e) {
 		return eventService.save(e);
 	}
+	
+	@GetMapping(value="/{id}/numGuests",produces=MediaType.APPLICATION_JSON_VALUE)
+	public int getNumberOfGuests(@PathVariable int id) {
+		return eventService.getNumberOfGuests(id);
+	}
 }

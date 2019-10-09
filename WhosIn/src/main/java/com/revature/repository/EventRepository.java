@@ -1,5 +1,6 @@
 package com.revature.repository;
 
+
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -32,4 +33,12 @@ public interface EventRepository extends JpaRepository<Event, Integer>{
 			+ "where e.eventid = :eventid",
 			nativeQuery=true)
 	public List<String> findEventTags(@Param("eventid") int id);
+	
+	@Query(value="select count(g.userid) " + 
+			"from \"event\" e " + 
+			"join guest g " + 
+			"on e.eventid = g.eventid " + 
+			"where e.eventid = :eventid",
+			nativeQuery=true)
+	public int getNumberOfGuests(@Param("eventid") int id);
 }

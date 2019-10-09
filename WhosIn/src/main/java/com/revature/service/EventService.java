@@ -43,6 +43,10 @@ public class EventService {
 		return eventRepository.save(e);
 	}
 	
+	public int getNumberOfGuests(int id) {
+		return eventRepository.getNumberOfGuests(id);
+	}
+	
 	@Autowired
 	public void setEventRepository(EventRepository eventRepository) {
 		this.eventRepository = eventRepository;
