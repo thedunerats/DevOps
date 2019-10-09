@@ -1,0 +1,15 @@
+#app-header {
+    width: 100%;
+}
+
+.bg-custom {
+    background-color: black;
+}
+
+.navbar-brand {
+    color: lightskyblue;
+}
+
+#lIn {
+    margin-right:25px;
+}

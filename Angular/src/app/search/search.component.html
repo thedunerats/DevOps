@@ -1,0 +1,45 @@
+<div class="search">
+    <input id="searchBar" (keyup)=searchInput($event) type="text" placeholder="Search..">
+    <div id="searchList">
+        {{ htmlStr }}
+        <!--Below dynamically adds ID to each event "div"(technically a table)-->
+        <table *ngFor="let d of data" attr.id="{{d.id}}LIST" (click)="clicking($event)">
+
+            <ng-container
+                *ngIf="(((d.eventname.toUpperCase().includes(htmlStr.toUpperCase())) || (d.eventdescription.toUpperCase().includes(htmlStr.toUpperCase()))) && htmlStr.length > 0 && htmlStr.toUpperCase() !== 'ALL EVENTS'); then caseA; else caseB">
+            </ng-container>
+            <ng-template #caseA>
+
+                <tbody>
+                    <tr>
+                        <td>{{d.eventname}}</td>
+                    </tr>
+                </tbody>
+            </ng-template>
+            <ng-template #caseB>
+                <div *ngIf="htmlStr.toUpperCase() === 'ALL EVENTS'">
+                    <tbody>
+                        <tr>
+                            <td>{{d.eventname}}</td>
+                        </tr>
+                    </tbody>
+                </div>
+            </ng-template>
+        </table>
+    </div>
+</div>
+
+<agm-map [zoom]="14" [latitude]="lat" [longitude]="lng">
+
+    <agm-marker *ngFor="let d of data" [latitude]="d.latitude" [longitude]="d.longitude"
+        [visible]=d.eventname.toUpperCase().includes(htmlStr.toUpperCase())||d.eventdescription.toUpperCase().includes(htmlStr.toUpperCase())> </agm-marker>
+</agm-map>
+<!--
+    <agm-map (mapClick)="getLatAndLong($event)" [id] = "map" [zoom]="14" [latitude]="centerlat" [longitude]="centerlng" [draggable] = "false">
+    <agm-marker *ngFor="let d of data" [latitude]="d.latitude" [longitude]="d.longitude"
+        [visible]=d.eventname.toUpperCase().includes(htmlStr.toUpperCase())||d.eventdescription.toUpperCase().includes(htmlStr.toUpperCase())> </agm-marker> --Need to populate with more markers. This one is a placeholder for now.
+        <agm-info-window #infoWindow> --Fixme: needs a listener to display infowindow when clicked. also display when moved?
+            <strong>test text</strong><br>
+          </agm-info-window>
+    </agm-map>
+-->
