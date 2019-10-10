@@ -1,0 +1,42 @@
+
+<div class="eventCreation" id = "eventForm">
+<h3 class = "text-center">Submit a new event here!</h3>
+    <form class = "container justify-content-center"> <!---Make a new event here. FIXME: Need to add actions to it.-->
+        <div class = "row">	
+                <div class="form-group col" id = "nameBar">
+                    <label for="exampleName">The name of your event:</label>
+                    <input type="text" class="form-control" name = "eventname" id="name" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group col" id = "tagBar">
+                    <label for="exampleType">Relevant tags you want to attach you your event:</label>
+                    <input type="text" class="form-control" name = "tag" id="eventTag" placeholder="Free food, music, career fair, etc.">
+                </div>
+        </div>
+        <div class = "row">
+            <div class="form-group col">
+                <label for="exampleDescr">A Brief Description of your Event</label>
+                <input type="text" name = "eventdescription" class="form-control" id="eventDescription">
+            </div>
+            <div class="form-group col">
+                    <label for="exampleFormat">The start time of your event:</label>
+                    <input type="datetime-local" name = "startTime" class="form-control" id="startTime"> 
+            </div>
+            <div class="form-group col">
+                <label for="endtime">The end time of your event:</label>
+                <input type="datetime-local" name = "endTime" class="form-control" id="endTime"> 
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary justify-content-center">Create Event</button>
+        <input type="hidden" id="custId" name="custId" value="3487">
+    </form>
+</div>
+
+
+<!---interactive map that places a pin with event info where the user clicks it-->
+    <agm-map (mapClick)="getLatAndLong($event)" [id] = "map" class = "col-md-6" [zoom]="14" [latitude]="centerlat" [longitude]="centerlng" [draggable] = "false">
+        <agm-marker [latitude]="lat" [longitude]="lng">
+            <agm-info-window> <!--info window that displays relevant text-->
+                <strong>test text</strong>
+            </agm-info-window>
+        </agm-marker>
+    </agm-map>    
