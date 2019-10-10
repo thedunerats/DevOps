@@ -38,6 +38,20 @@ public class Guest {
 		this.event = event;
 		this.user = user;
 	}
+	
+	public int getEventId() {
+		if(this.event != null) {
+			return this.event.getId();
+		}
+		return -1;
+	}
+	
+	public int getUserId() {
+		if(this.user != null) {
+			return this.user.getId();
+		}
+		return -1;
+	}
 
 	public int getId() {
 		return id;

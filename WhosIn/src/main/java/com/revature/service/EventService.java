@@ -39,14 +39,21 @@ public class EventService {
 		return eventRepository.findEventTags(id);
 	}
 	
-	public <S extends Event> S save(Event e) {
-		return eventRepository.save(e);
+	public void save(Event e) {
+		eventRepository.save(e);
 	}
 	
 	public int getNumberOfGuests(int id) {
 		return eventRepository.getNumberOfGuests(id);
 	}
 	
+	public void insertAttendee(int eventid, int userid) {
+		eventRepository.insertAttendee(eventid, userid);
+	}
+	
+	public void removeAttendee(int eventid, int userid) {
+		eventRepository.removeAttendee(eventid, userid);
+	}
 	@Autowired
 	public void setEventRepository(EventRepository eventRepository) {
 		this.eventRepository = eventRepository;

@@ -1,69 +1,34 @@
 package com.revature.model;
 
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-@Entity
-
-@Table(name="event")
-public class Event {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="eventid")
+public class EventRequestModel {
 	private int id;
 	
-	@Column(name="eventname")
 	private String eventname;
 	
-	@Column(name="eventdescription")
 	private String eventdescription;
 	
-	@Column(name="eventstartdate")
-	private Timestamp eventstartdate;
+	private String eventstartdate;
 	
-	@Column(name="eventenddate")
-	private Timestamp eventenddate;
+	private String eventenddate;
 	
-	@Column(name="latitude")
 	private Double latitude;
 	
-	@Column(name="longitude")
 	private Double longitude;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="eventowner")
-	private User eventowner;
+	private int eventownerid;
 	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinTable(name = "eventtags",
-    joinColumns = {@JoinColumn(name = "eventid")}, 
-    inverseJoinColumns = {@JoinColumn(name = "tagid")})
-	@JsonIgnore
-	private Set<Tags> tags = new HashSet<>();
-	
-
-	public Event() {
+	public EventRequestModel() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
-	public Event(int id, String eventname, String eventdescription, Timestamp eventstartdate, Timestamp eventenddate,
-			Double latitude, Double longitude, User eventowner) {
+	public EventRequestModel(int id, String eventname, String eventdescription, String eventstartdate,
+			String eventenddate, Double latitude, Double longitude, int eventownerid) {
 		super();
 		this.id = id;
 		this.eventname = eventname;
@@ -72,23 +37,21 @@ public class Event {
 		this.eventenddate = eventenddate;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.eventowner = eventowner;
+		this.eventownerid = eventownerid;
 	}
 
-	public Event(int id, String eventname, String eventdescription, Timestamp eventstartdate, Timestamp eventenddate,
-			Double latitude, Double longitude, User eventowner, Set<Tags> tags) {
-		super();
-		this.id = id;
-		this.eventname = eventname;
-		this.eventdescription = eventdescription;
-		this.eventstartdate = eventstartdate;
-		this.eventenddate = eventenddate;
-		this.latitude = latitude;
-		this.longitude = longitude;
-		this.eventowner = eventowner;
-		this.tags = tags;
+	public Timestamp convertStringToTimestamp(String s) {
+	    Date parsedTimeStamp;
+		try {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			parsedTimeStamp = dateFormat.parse(s);
+			return new Timestamp(parsedTimeStamp.getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
-
+	
 	public int getId() {
 		return id;
 	}
@@ -113,19 +76,19 @@ public class Event {
 		this.eventdescription = eventdescription;
 	}
 
-	public Timestamp getEventstartdate() {
+	public String getEventstartdate() {
 		return eventstartdate;
 	}
 
-	public void setEventstartdate(Timestamp eventstartdate) {
+	public void setEventstartdate(String eventstartdate) {
 		this.eventstartdate = eventstartdate;
 	}
 
-	public Timestamp getEventenddate() {
+	public String getEventenddate() {
 		return eventenddate;
 	}
 
-	public void setEventenddate(Timestamp eventenddate) {
+	public void setEventenddate(String eventenddate) {
 		this.eventenddate = eventenddate;
 	}
 
@@ -145,20 +108,12 @@ public class Event {
 		this.longitude = longitude;
 	}
 
-	public User getEventowner() {
-		return eventowner;
+	public int getEventownerid() {
+		return eventownerid;
 	}
 
-	public void setEventowner(User eventowner) {
-		this.eventowner = eventowner;
-	}
-
-	public Set<Tags> getTags() {
-		return tags;
-	}
-
-	public void setTags(Set<Tags> tags) {
-		this.tags = tags;
+	public void setEventownerid(int eventownerid) {
+		this.eventownerid = eventownerid;
 	}
 
 	@Override
@@ -168,12 +123,11 @@ public class Event {
 		result = prime * result + ((eventdescription == null) ? 0 : eventdescription.hashCode());
 		result = prime * result + ((eventenddate == null) ? 0 : eventenddate.hashCode());
 		result = prime * result + ((eventname == null) ? 0 : eventname.hashCode());
+		result = prime * result + eventownerid;
 		result = prime * result + ((eventstartdate == null) ? 0 : eventstartdate.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((latitude == null) ? 0 : latitude.hashCode());
 		result = prime * result + ((longitude == null) ? 0 : longitude.hashCode());
-		result = prime * result + ((eventowner == null) ? 0 : eventowner.hashCode());
-		result = prime * result + ((tags == null) ? 0 : tags.hashCode());
 		return result;
 	}
 
@@ -185,7 +139,7 @@ public class Event {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Event other = (Event) obj;
+		EventRequestModel other = (EventRequestModel) obj;
 		if (eventdescription == null) {
 			if (other.eventdescription != null)
 				return false;
@@ -200,6 +154,8 @@ public class Event {
 			if (other.eventname != null)
 				return false;
 		} else if (!eventname.equals(other.eventname))
+			return false;
+		if (eventownerid != other.eventownerid)
 			return false;
 		if (eventstartdate == null) {
 			if (other.eventstartdate != null)
@@ -218,24 +174,15 @@ public class Event {
 				return false;
 		} else if (!longitude.equals(other.longitude))
 			return false;
-		if (eventowner == null) {
-			if (other.eventowner != null)
-				return false;
-		} else if (!eventowner.equals(other.eventowner))
-			return false;
-		if (tags == null) {
-			if (other.tags != null)
-				return false;
-		} else if (!tags.equals(other.tags))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Event [id=" + id + ", eventname=" + eventname + ", eventdescription=" + eventdescription
+		return "EventRequestModel [id=" + id + ", eventname=" + eventname + ", eventdescription=" + eventdescription
 				+ ", eventstartdate=" + eventstartdate + ", eventenddate=" + eventenddate + ", latitude=" + latitude
-				+ ", longitude=" + longitude + ", eventowner=" + eventowner + ", tags=" + tags + "]";
+				+ ", longitude=" + longitude + ", eventownerid=" + eventownerid + "]";
 	}
+
 	
 }

@@ -1,3 +1,4 @@
+<app-header></app-header>
 <agm-map (mapClick)="getLatAndLong($event)" [id] = "map" [zoom]="14" [latitude]="centerlat" [longitude]="centerlng" [draggable] = "false">
     <agm-marker *ngFor="let d of data" [latitude]="d.latitude" [longitude]="d.longitude"
         [visible]=d.eventname.toUpperCase().includes(htmlStr.toUpperCase())||d.eventdescription.toUpperCase().includes(htmlStr.toUpperCase())> </agm-marker><!---Need to populate with more markers. This one is a placeholder for now.-->

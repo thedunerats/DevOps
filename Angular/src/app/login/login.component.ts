@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
         if(this.returnedUser != null){
           let invalid = document.getElementById("login-failed");
           invalid.style.display = "none";
+          this.storage.set("userid", this.returnedUser["userid"]);
           this.storage.set("username",this.returnedUser["username"]);
           this.storage.set("userrole",this.returnedUser["userroleid"]);
           this.storage.set("loggedIn","true");
