@@ -21,10 +21,21 @@ export class EventService {
     getAllTags(): Observable<Event[]> {
         // console.log("test")
         
-        return this.http.get("http://localhost:8080/event/all") as Observable<Event[]>;
+        return this.http.get("http://localhost:8084/event/all") as Observable<Event[]>;
 
         
 
 
     }
+
+    getNumGuests(id:number): Observable<number> {
+        // console.log("test")
+        
+        return this.http.get("http://localhost:8084/event/" + id + "/numGuests") as Observable<number>;
+
+        
+
+
+    }
+
 }

@@ -4,6 +4,7 @@ import { htmlAstToRender3Ast } from '@angular/compiler/src/render3/r3_template_t
 import { HttpClient } from '@angular/common/http';
 import { Event } from 'src/app/classes/events';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -67,15 +68,53 @@ export class HomeComponent implements OnInit {
 
   openedWindow: string;
 
-  openWindow(eventname) {
+  openWindow(eventname, eventid) {
     this.openedWindow = eventname;
+    console.log(eventid)
+    this.es.getNumGuests(eventid).subscribe(
+      /**
+       * When working with observables, we have access to two callback functions: one that executes in case of success and another that executes in case of failure.
+       */
+      data => {
+        this.numberOfGuests = data;
+        // console.log(this.data);
+        
+      },
+      error => {
+        error = "Sorry. Couldn't get those tags!"
+        console.log(error);
+      }
+    )
   }
 
   isInfoWindowOpen(eventname) {
 
     return this.openedWindow == eventname;
   }
+
+  closeWindow() {
+    return this.openedWindow = "";
+  }
+
+  attendingBool: boolean = false;
+
+
+  attendingButtonEnabled() {
+
+    return this.attendingBool = true;
+  }
+
+  notAttendingButtonEnabled() {
+    return this.attendingBool = false;
+  }
+
+  numberOfGuests: number;
+
+
+
+
 }
+
 
 
 
