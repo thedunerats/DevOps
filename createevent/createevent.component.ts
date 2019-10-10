@@ -29,10 +29,16 @@ export class CreateeventComponent implements OnInit {
 
   readonly ROOT_URL = ''
 
+  eName: any;
+  eTag: any;
+  eDesc: any;
+  eBegin: string;
 
   data: string[] = []; 
 
   ngOnInit() {
+    // use ngmodel to populate the info window. either that or ngfor.
+    
 
   }
 

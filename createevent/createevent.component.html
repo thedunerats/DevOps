@@ -5,21 +5,21 @@
         <div class = "row">	
                 <div class="form-group col" id = "nameBar">
                     <label for="exampleName">The name of your event:</label>
-                    <input type="text" class="form-control" name = "eventname" id="name" aria-describedby="emailHelp">
+                    <input [(ngModel)] = "eName" type="text" class="form-control" name = "eventname" id="name" aria-describedby="emailHelp">
                 </div>
                 <div class="form-group col" id = "tagBar">
                     <label for="exampleType">Relevant tags you want to attach you your event:</label>
-                    <input type="text" class="form-control" name = "tag" id="eventTag" placeholder="Free food, music, career fair, etc.">
+                    <input [(ngModel)] = "eTag" type="text" class="form-control" name = "tag" id="eventTag" placeholder="Free food, music, career fair, etc.">
                 </div>
         </div>
         <div class = "row">
             <div class="form-group col">
                 <label for="exampleDescr">A Brief Description of your Event</label>
-                <input type="text" name = "eventdescription" class="form-control" id="eventDescription">
+                <input [(ngModel)] = "eDesc" type="text" name = "eventdescription" class="form-control" id="eventDescription">
             </div>
             <div class="form-group col">
                     <label for="exampleFormat">The start time of your event:</label>
-                    <input type="datetime-local" name = "startTime" class="form-control" id="startTime"> 
+                    <input [(ngModel)] = "eBegin" type="datetime-local" name = "startTime" class="form-control" id="startTime"> 
             </div>
             <div class="form-group col">
                 <label for="endtime">The end time of your event:</label>
@@ -36,7 +36,10 @@
     <agm-map (mapClick)="getLatAndLong($event)" [id] = "map" class = "col-md-6" [zoom]="14" [latitude]="centerlat" [longitude]="centerlng" [draggable] = "false">
         <agm-marker [latitude]="lat" [longitude]="lng">
             <agm-info-window> <!--info window that displays relevant text-->
-                <strong>test text</strong>
+                <strong>{{eName}}</strong>
+                <p>{{eTag}}</p>
+                <p>{{eDesc}}</p>
+                <p>{{eBegin}}</p>
             </agm-info-window>
         </agm-marker>
     </agm-map>    
