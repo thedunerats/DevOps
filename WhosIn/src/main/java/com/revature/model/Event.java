@@ -62,10 +62,9 @@ public class Event {
 		super();
 	}
 
-	public Event(int id, String eventname, String eventdescription, Timestamp eventstartdate, Timestamp eventenddate,
+	public Event(String eventname, String eventdescription, Timestamp eventstartdate, Timestamp eventenddate,
 			Double latitude, Double longitude, User eventowner) {
 		super();
-		this.id = id;
 		this.eventname = eventname;
 		this.eventdescription = eventdescription;
 		this.eventstartdate = eventstartdate;

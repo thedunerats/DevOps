@@ -43,8 +43,8 @@ public class EventRequestModel {
 	public Timestamp convertStringToTimestamp(String s) {
 	    Date parsedTimeStamp;
 		try {
-			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-			parsedTimeStamp = dateFormat.parse(s);
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss:SSS");
+			parsedTimeStamp = dateFormat.parse(s+":000");
 			return new Timestamp(parsedTimeStamp.getTime());
 		} catch (ParseException e) {
 			e.printStackTrace();

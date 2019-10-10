@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.model.Event;
 import com.revature.model.EventRequestModel;
+import com.revature.model.GuestRequestModel;
 import com.revature.model.User;
 import com.revature.service.EventService;
 import com.revature.service.UserService;
@@ -61,12 +63,12 @@ public class EventController {
 	}
 	
 	@PostMapping(value="/insert",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
-	public Event insertEvent(EventRequestModel ereq) {
+	public Event insertEvent(@RequestBody EventRequestModel ereq) {
+		System.out.println(ereq);
 		Timestamp start = ereq.convertStringToTimestamp(ereq.getEventstartdate());
 		Timestamp end = ereq.convertStringToTimestamp(ereq.getEventenddate());
 		User u = userService.findById(ereq.getEventownerid());
 		Event e = new Event(
-				ereq.getId(),
 				ereq.getEventname(),
 				ereq.getEventdescription(),
 				start,
@@ -84,24 +86,24 @@ public class EventController {
 		return eventService.getNumberOfGuests(id);
 	}
 	
-	@GetMapping(value="/insertGuest")
-	public boolean insertAttendee(@RequestParam("eventid") int eventid, @RequestParam("userid") int userid) {
-		if( eventid > 0 &&  userid > 0) {
+	@PostMapping(value="/insertGuest",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
+	public boolean insertAttendee(@RequestBody GuestRequestModel grm) {
+		if( grm.getEventid() > 0 &&  grm.getUserid() > 0) {
 			try {
-			eventService.insertAttendee(eventid, userid);
-			return true;
+				eventService.insertAttendee(grm.getEventid(), grm.getUserid());
+				return true;
 			} catch(Exception noResultSet) { }
 		}
 		return false;
 	}
 	
-	@GetMapping(value="/removeGuest")
-	public boolean removeAttendee(@RequestParam("eventid") int eventid, @RequestParam("userid") int userid) {
-		if(eventid > 0 && userid > 0) {
+	@PostMapping(value="/removeGuest",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
+	public boolean removeAttendee(@RequestBody GuestRequestModel grm) {
+		if( grm.getEventid() > 0 &&  grm.getUserid() > 0) {
 			try {
-				eventService.removeAttendee(eventid, userid);
+				eventService.removeAttendee(grm.getEventid(), grm.getUserid());
 				return true;
-			} catch (Exception noResultSet) { }
+			} catch(Exception noResultSet) { }
 		}
 		return false;
 	}
