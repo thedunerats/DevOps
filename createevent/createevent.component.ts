@@ -32,13 +32,18 @@ export class CreateeventComponent implements OnInit {
   eName: any;
   eTag: any;
   eDesc: any;
-  eBegin: string;
+
+  eBegin: any; //might need to use a keyup listener.
+  eEnd: any;
 
   data: string[] = []; 
 
   ngOnInit() {
     // use ngmodel to populate the info window. either that or ngfor.
-    
+   // this.eBegin = (<HTMLInputElement>document.getElementById("startTime")).value;
+    //var stamp = new Date((<HTMLInputElement>document.getElementById("startTime")).value);
+    //FIXME: doesnt work yet.
+    //console.log(this.eBegin);
 
   }
 

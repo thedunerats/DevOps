@@ -19,11 +19,11 @@
             </div>
             <div class="form-group col">
                     <label for="exampleFormat">The start time of your event:</label>
-                    <input [(ngModel)] = "eBegin" type="datetime-local" name = "startTime" class="form-control" id="startTime"> 
+                    <input [(ngModel)] = "eBegin" type="text" name = "startTime" class="form-control" id="startTime" placeholder="yyyy-mm-dd hh:mm:ss"> 
             </div>
             <div class="form-group col">
                 <label for="endtime">The end time of your event:</label>
-                <input type="datetime-local" name = "endTime" class="form-control" id="endTime"> 
+                <input [(ngModel)] ="eEnd" type="text" name = "endTime" class="form-control" id="endTime" placeholder="yyyy-mm-dd hh:mm:ss"> 
             </div>
         </div>
         <button type="submit" class="btn btn-primary justify-content-center">Create Event</button>
@@ -39,7 +39,8 @@
                 <strong>{{eName}}</strong>
                 <p>{{eTag}}</p>
                 <p>{{eDesc}}</p>
-                <p>{{eBegin}}</p>
+                <p>Starts at: {{eBegin}}</p>
+                <p>Ends at: {{eEnd}}</p>
             </agm-info-window>
         </agm-marker>
     </agm-map>    
