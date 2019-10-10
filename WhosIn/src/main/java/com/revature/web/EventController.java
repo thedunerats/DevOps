@@ -36,31 +36,67 @@ public class EventController {
 		this.userService = userService;
 	}
 	
+	/*
+	 * GET method
+	 * [URL]/event/all
+	 * Returns a list of all of the events in the database
+	 */
 	@GetMapping(value="/all", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Event> findAll() {
 		return eventService.findAll();
 	}
 	
+	/*
+	 * GET method
+	 * [URL]/event/{id}
+	 * Returns an event specified by id
+	 */
 	@GetMapping(value="/{id}",produces=MediaType.APPLICATION_JSON_VALUE)
 	public Event findById(@PathVariable int id) {
 		return eventService.findById(id);
 	}
 	
+	/*
+	 * GET method
+	 * [URL]/event/name/{eventname}
+	 * 
+	 * Returns an event specified by name
+	 */
 	@GetMapping(value="/name/{eventname}",produces=MediaType.APPLICATION_JSON_VALUE)
 	public Event findByEventname(@PathVariable String eventname) {
 		return eventService.findByEventname(eventname);
 	}
 	
+	/*
+	 * GET method
+	 * [URL]/event/{id}/guests
+	 * 
+	 * Returns the usernames of guests who are attending a specified event
+	 */
 	@GetMapping(value="/{id}/guests",produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<String> getEventGuests(@PathVariable int id) {
 		return eventService.getEventGuests(id);
 	}
 	
+	/*
+	 * GET method
+	 * [URL]/event/{id}/tags
+	 * 
+	 * Returns all of the events associated with a specified tag
+	 */
 	@GetMapping(value="/{id}/tags",produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<String> getEventTags(@PathVariable int id) {
 		return eventService.getEventTags(id);
 	}
 	
+	/*
+	 * POST method
+	 * [URL]/event/insert
+	 * 
+	 * Inserts a new event into the database
+	 * Will not work if the provided start and end dates are not in the format
+	 * 	"yyyy-MM-dd hh:mm:ss"
+	 */
 	@PostMapping(value="/insert",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
 	public Event insertEvent(@RequestBody EventRequestModel ereq) {
 		Timestamp start = ereq.convertStringToTimestamp(ereq.getEventstartdate());
@@ -79,11 +115,23 @@ public class EventController {
 		return e;
 	}
 	
+	/*
+	 * GET method
+	 * [URL]/event/{id}/numGuests
+	 * 
+	 * Returns the number of guests who will be attending a specified event
+	 */
 	@GetMapping(value="/{id}/numGuests",produces=MediaType.APPLICATION_JSON_VALUE)
 	public int getNumberOfGuests(@PathVariable int id) {
 		return eventService.getNumberOfGuests(id);
 	}
 	
+	/*
+	 * POST method
+	 * [URL]/event/insertGuest
+	 * 
+	 * Inserts a guest into the database given the specified event and user ids
+	 */
 	@PostMapping(value="/insertGuest",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
 	public boolean insertAttendee(@RequestBody GuestRequestModel grm) {
 		if( grm.getEventid() > 0 &&  grm.getUserid() > 0) {
@@ -95,6 +143,12 @@ public class EventController {
 		return false;
 	}
 	
+	/*
+	 * POST method
+	 * [URL]/event/removeGuest
+	 * 
+	 * Deletes a guest from the database given the specified event and user ids
+	 */
 	@PostMapping(value="/removeGuest",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
 	public boolean removeAttendee(@RequestBody GuestRequestModel grm) {
 		if( grm.getEventid() > 0 &&  grm.getUserid() > 0) {
