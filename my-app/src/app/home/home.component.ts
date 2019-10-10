@@ -21,10 +21,10 @@ export class HomeComponent implements OnInit {
   //have to include service in constructor 
   constructor(private es: EventService) { }
 
-  data: Event[] = []; 
+  data: Event[] = [];
 
   ngOnInit() {
-    
+
   }
 
 
@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
        */
       data => {
         this.data = data;
-        console.log(this.data);
+        // console.log(this.data);
       },
       error => {
         error = "Sorry. Couldn't get those tags!"
@@ -53,9 +53,9 @@ export class HomeComponent implements OnInit {
     let searchBar = (<HTMLInputElement>document.getElementById("searchBar")).value;
 
     this.htmlStr = searchBar;
-   
 
-    // this.es.getAllTags();
+
+
 
 
 
@@ -63,11 +63,19 @@ export class HomeComponent implements OnInit {
 
 
 
-clicking(event) {
-
-  alert(event.target.id)
-    
-};
 
 
+  openedWindow: string;
+
+  openWindow(eventname) {
+    this.openedWindow = eventname;
+  }
+
+  isInfoWindowOpen(eventname) {
+
+    return this.openedWindow == eventname;
+  }
 }
+
+
+
