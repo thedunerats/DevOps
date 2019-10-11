@@ -1,11 +1,12 @@
 package com.revature.repository;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import com.revature.model.User;
 
-public interface UserRepository {
-	List<User> getAllUsers();
-	User getUserById(int id);
-	void insertUser(User u);
+@Repository(value = "userRepository")
+public interface UserRepository extends JpaRepository<User, Integer>{
+	public User findById(int id);
+	public User findByUsernameAndPassword(String username, String password);
 }

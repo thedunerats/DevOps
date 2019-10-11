@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-md bg-custom navbar-dark sticky-top">
+  <!-- Brand -->
+  <a class="navbar-brand" href="./">Who's In?</a>
+  
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item"><a class="nav-link" href="/app-search">Search</a></li>
+      <li class="nav-item"><a class="nav-link" href="/app-createevent">Create An Event</a></li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item"><a *ngIf="loggedIn; else loginLink" class="nav-link" href="/app-search" (click)="logout()">Log Out</a></li>
+      <ng-template #loginLink><li class="nav-item" id="lIn"><a class="nav-link" href="/app-login">Log In</a></li></ng-template>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,45 @@
+<app-header></app-header>
+<div class="eventCreation" id = "event-Form">
+    <h3 class = "text-center">Submit a new event here!</h3>
+    <form class = "container justify-content-center" #eventForm="ngForm" (ngSubmit)="createEvent(eventForm)">
+        <div class = "row">	
+                <div class="form-group col" id = "nameBar">
+                    <label for="exampleName">The name of your event:</label>
+                    <input type="text" class="form-control" name = "eventname" id="name" aria-describedby="emailHelp" ngModel>
+                </div>
+                <div class="form-group col" id = "tagBar">
+                    <label for="exampleType">Relevant tags you want to attach you your event:</label>
+                    <input type="text" class="form-control" name = "tag" id="eventTag" placeholder="Free food, music, career fair, etc." ngModel>
+                </div>
+        </div>
+        <div class = "row">
+            <div class="form-group col">
+                <label for="exampleDescr">A Brief Description of your Event</label>
+                <input type="text" name = "eventdescription" class="form-control" id="eventDescription" ngModel>
+            </div>
+            <div class="form-group col">
+                    <label for="exampleFormat">The start time of your event:</label>
+                    <input type="text" name = "startTime" class="form-control" id="startTime" placeholder="yyyy-mm-dd hh:mm:ss" ngModel> 
+            </div>
+            <div class="form-group col">
+                <label for="endtime">The end time of your event:</label>
+                <input type="text" name = "endTime" class="form-control" id="endTime" placeholder="yyyy-mm-dd hh:mm:ss" ngModel> 
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary justify-content-center">Create Event</button>
+    </form>
+</div>
+    
+    
+    <!---interactive map that places a pin with event info where the user clicks it-->
+<agm-map (mapClick)="getLatAndLong($event)" [id] = "map" class = "col-md-6" [zoom]="14" [latitude]="centerlat" [longitude]="centerlng" [draggable] = "false">
+    <agm-marker [latitude]="lat" [longitude]="lng">
+        <agm-info-window> <!--info window that displays relevant text-->
+            <strong>{{eName}}</strong>
+            <p>{{eTag}}</p>
+            <p>{{eDesc}}</p>
+            <p>Starts at: {{eBegin}}</p>
+            <p>Ends at: {{eEnd}}</p>
+        </agm-info-window>
+    </agm-marker>
+</agm-map>

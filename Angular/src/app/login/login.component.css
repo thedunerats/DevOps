@@ -1,0 +1,9 @@
+#login-failed {
+    display: none;
+    color: red;
+}
+
+#signup {
+    text-align: center;
+    font-size: 14px;
+}
