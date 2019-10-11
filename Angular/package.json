@@ -7,9 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "predeploy": "ng build -prod -aot",
-    "deploy": "node ./scripts/deploy.js"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
@@ -22,9 +20,13 @@
     "@angular/platform-browser": "~8.2.9",
     "@angular/platform-browser-dynamic": "~8.2.9",
     "@angular/router": "~8.2.9",
+    "@types/datejs": "0.0.30",
     "angular-webstorage-service": "^1.0.2",
     "bootstrap": "^4.3.1",
+    "datejs": "^1.0.0-rc3",
+    "jquery": "^1.9.1",
     "ngx-bootstrap": "^5.1.2",
+    "popper.js": "^1.15.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

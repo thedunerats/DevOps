@@ -1,10 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../classes/user';
-import { NgForm } from '@angular/forms'
+import { NgForm } from '@angular/forms';
 import { WebStorageService, SESSION_STORAGE } from 'angular-webstorage-service';
 import { Router } from '@angular/router';
-import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-login',
@@ -38,11 +37,10 @@ export class LoginComponent implements OnInit {
         if(this.returnedUser != null){
           let invalid = document.getElementById("login-failed");
           invalid.style.display = "none";
-          this.storage.set("userid", this.returnedUser["userid"]);
+          this.storage.set("userid", this.returnedUser["id"]);
           this.storage.set("username",this.returnedUser["username"]);
           this.storage.set("userrole",this.returnedUser["userroleid"]);
           this.storage.set("loggedIn","true");
-          console.log(this.storage.get("loggedIn"));
           this.router.navigate(['app-search']);
         }
         else{

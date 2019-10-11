@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.model.Event;
 import com.revature.model.EventRequestModel;
-import com.revature.model.GuestRequestModel;
 import com.revature.model.User;
 import com.revature.service.EventService;
 import com.revature.service.UserService;
@@ -99,13 +98,14 @@ public class EventController {
 	 */
 	@PostMapping(value="/insert",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
 	public Event insertEvent(@RequestBody EventRequestModel ereq) {
-		Timestamp start = ereq.convertStringToTimestamp(ereq.getEventstartdate());
-		Timestamp end = ereq.convertStringToTimestamp(ereq.getEventenddate());
-		User u = userService.findById(ereq.getEventownerid());
+		System.out.println(ereq);
+		Timestamp start = ereq.convertStringToTimestamp(ereq.getEventStartDate());
+		Timestamp end = ereq.convertStringToTimestamp(ereq.getEventEndDate());
+		User u = userService.findById(ereq.getEventOwner());
 		Event e = new Event(
-				ereq.getEventname(),
-				ereq.getEventdescription(),
-				start,
+				ereq.getEventName(),
+				ereq.getEventDescription(),
+				start,	
 				end,
 				ereq.getLatitude(),
 				ereq.getLongitude(),
@@ -124,39 +124,5 @@ public class EventController {
 	@GetMapping(value="/{id}/numGuests",produces=MediaType.APPLICATION_JSON_VALUE)
 	public int getNumberOfGuests(@PathVariable int id) {
 		return eventService.getNumberOfGuests(id);
-	}
-	
-	/*
-	 * POST method
-	 * [URL]/event/insertGuest
-	 * 
-	 * Inserts a guest into the database given the specified event and user ids
-	 */
-	@PostMapping(value="/insertGuest",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
-	public boolean insertAttendee(@RequestBody GuestRequestModel grm) {
-		if( grm.getEventid() > 0 &&  grm.getUserid() > 0) {
-			try {
-				eventService.insertAttendee(grm.getEventid(), grm.getUserid());
-				return true;
-			} catch(Exception noResultSet) { }
-		}
-		return false;
-	}
-	
-	/*
-	 * POST method
-	 * [URL]/event/removeGuest
-	 * 
-	 * Deletes a guest from the database given the specified event and user ids
-	 */
-	@PostMapping(value="/removeGuest",consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
-	public boolean removeAttendee(@RequestBody GuestRequestModel grm) {
-		if( grm.getEventid() > 0 &&  grm.getUserid() > 0) {
-			try {
-				eventService.removeAttendee(grm.getEventid(), grm.getUserid());
-				return true;
-			} catch(Exception noResultSet) { }
-		}
-		return false;
 	}
 }

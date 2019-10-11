@@ -47,13 +47,6 @@ public class EventService {
 		return eventRepository.getNumberOfGuests(id);
 	}
 	
-	public void insertAttendee(int eventid, int userid) {
-		eventRepository.insertAttendee(eventid, userid);
-	}
-	
-	public void removeAttendee(int eventid, int userid) {
-		eventRepository.removeAttendee(eventid, userid);
-	}
 	@Autowired
 	public void setEventRepository(EventRepository eventRepository) {
 		this.eventRepository = eventRepository;

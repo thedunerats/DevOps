@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://ec2-18-219-86-104.us-east-2.compute.amazonaws.com:8090"
+  //apiUrl: "http://ec2-13-59-83-128.us-east-2.compute.amazonaws.com:8090"
+  apiUrl: "http://localhost:8090"
 };
 
 /*

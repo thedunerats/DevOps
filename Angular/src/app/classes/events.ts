@@ -10,18 +10,30 @@ export class Event {
     public longitude: number;
     public eventOwner: number;
     //Must use the constructor keyword.
-    constructor(event_id: number, event_name: string, event_description: string, event_start_date: string, event_end_date: string, latitude: number, longitude: number, event_owner: number) {
-        this.id = event_id;
-        this.eventName = event_name;
-        this.eventDescription = event_description;
-        this.eventStartDate = event_start_date;
-        this.eventEndDate = event_end_date;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.eventOwner = event_owner;
+    constructor(){}
+    
+    public setId(id:number) {
+        this.id = id;
     }
-
-    public getId(id:any, someString:string){
-        return this.id;
+    public setEventName(eventName:string) {
+        this.eventName = eventName;
+    }
+    public setEventDescription(event_description:string) {
+        this.eventDescription = event_description;
+    }
+    public setStartDate(event_start_date:string) {
+        this.eventStartDate = event_start_date;
+    }
+    public setEndDate(event_end_date:string) {
+        this.eventEndDate = event_end_date;
+    }
+    public setLatitude(latitude:number) {
+        this.latitude = latitude;
+    }
+    public setLongitude(longitude:number) {
+        this.longitude = longitude;
+    }
+    public setEventOwner(event_owner:number) {
+        this.eventOwner = event_owner;
     }
 }

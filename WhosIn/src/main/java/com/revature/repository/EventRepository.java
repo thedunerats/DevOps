@@ -40,14 +40,4 @@ public interface EventRepository extends JpaRepository<Event, Integer>{
 			"where e.eventid = :eventid",
 			nativeQuery=true)
 	public int getNumberOfGuests(@Param("eventid") int id);
-	
-	@Query(value="insert into guest values " + 
-			"(default, :eventid, :userid)",
-			nativeQuery=true)
-	public void insertAttendee(@Param("eventid") int eventid, @Param("userid") int userid);
-	
-	@Query(value="delete from guest where " + 
-			"eventid = :eventid and userid = :userid",
-			nativeQuery=true)
-	public void removeAttendee(@Param("eventid") int eventid, @Param("userid") int userid);
 }

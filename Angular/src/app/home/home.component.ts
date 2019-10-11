@@ -22,12 +22,9 @@ export class HomeComponent implements OnInit {
   readonly ROOT_URL = '';
 
   //have to include service in constructor 
-  constructor(private es: EventService) { }
-
-  data: Event[] = []; 
+  constructor() { }
 
   ngOnInit() {
-
   }
 
   getLatAndLong(event){ // gets latitude and longitude from a map click
@@ -37,26 +34,4 @@ export class HomeComponent implements OnInit {
     this.lat = event.coords.lat;
     this.lng = event.coords.lng;
   }
-
-  searchInput(event) {
-    this.es.getAllTags().subscribe(
-      data => {
-        this.data = data;
-        console.log(this.data);
-      },
-      error => {
-        error = "Sorry. Couldn't get those tags!"
-        console.log(error);
-      }
-
-    );
-    let searchBar = (<HTMLInputElement>document.getElementById("searchBar")).value;
-
-    this.htmlStr = searchBar;
-  }
-  clicking(event) {
-
-    alert(event.target.id)
-      
-  };
 }
