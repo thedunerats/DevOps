@@ -1,0 +1,67 @@
+<div class="search">
+    <input id="searchBar" (keyup)=searchInput($event) type="text" placeholder="Search..">
+    <div id="searchList">
+        Type an event name or description to filter events. <br> Or type 'all events' to see everything that's going on.
+        <!--Below dynamically adds ID to each event "div"(technically a table)-->
+        <table *ngFor="let d of data" attr.id="{{d.id}}" (click)="openWindow(this.d.eventname, this.d.id)">
+
+            <ng-container
+                *ngIf="(((d.eventname.toUpperCase().includes(htmlStr.toUpperCase())) || (d.eventdescription.toUpperCase().includes(htmlStr.toUpperCase()))) && htmlStr.length > 0 && htmlStr.toUpperCase() !== 'ALL EVENTS'); then caseA; else caseB">
+            </ng-container>
+            <ng-template #caseA>
+
+                <tbody>
+                    <tr>
+                        <!--CHANGED-->
+                        <td>
+                            <!--This is a table. Again and again and again. This is table --> {{d.eventname}}</td>
+                    </tr>
+                </tbody>
+
+
+
+
+
+
+
+            </ng-template>
+            <ng-template #caseB>
+                <div *ngIf="htmlStr.toUpperCase() === 'ALL EVENTS'">
+                    <tbody>
+                        <tr>
+                            <!--CHANGED-->
+                            <td>
+                                <!--This is a table. Again and again and again. This is table --> {{d.eventname}}</td>
+                        </tr>
+                    </tbody>
+                </div>
+
+
+
+
+
+
+            </ng-template>
+
+        </table>
+    </div>
+</div>
+
+<agm-map [zoom]="14" [latitude]="lat" [longitude]="lng">
+
+    <agm-marker *ngFor="let d of data" [latitude]="d.latitude" [longitude]="d.longitude"
+        [visible]="((d.eventname.toUpperCase().includes(htmlStr.toUpperCase())||d.eventdescription.toUpperCase().includes(htmlStr.toUpperCase())) && htmlStr.length > 0) || htmlStr.toUpperCase() === 'ALL EVENTS'">
+        <agm-info-window
+            [isOpen]="isInfoWindowOpen(this.d.eventname) && (((htmlStr.length > 0 && ((this.d.eventname.toUpperCase().includes(htmlStr.toUpperCase())) || (this.d.eventdescription.toUpperCase().includes(htmlStr.toUpperCase())))) || htmlStr.toUpperCase() === 'ALL EVENTS'))">
+            {{d.eventname}}<br>
+            {{d.eventstartdate}} - {{d.eventenddate}}<br>
+            Number of guests: {{numberOfGuests}}<br>
+            <button [disabled]="attendingBool" (click)="attendingButtonEnabled()">Attending</button>
+            <button [disabled]="!attendingBool" (click)="notAttendingButtonEnabled()">No Longer Attending</button>
+            <button (click)="closeWindow()">Close Window</button>
+        </agm-info-window>
+
+    </agm-marker>
+
+
+</agm-map>
