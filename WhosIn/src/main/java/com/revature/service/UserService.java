@@ -17,6 +17,9 @@ public class UserService {
 	public User verifyLogin(String username, String password) {
 		return userRepository.findByUsernameAndPassword(username,password);
 	}
+	public void save(User u) {
+		userRepository.save(u);
+	}
 	
 	@Autowired
 	public void setUserRepository(UserRepository userRepository) {

@@ -16,4 +16,8 @@ export class UserService {
   login(user:User):Observable<User> {
     return this.http.post(API_URL + "/login",user) as Observable<User>;
   }
+
+  signup(user:User):Observable<User> {
+    return this.http.post(API_URL + "/signup",user) as Observable<User>;
+  }
 }

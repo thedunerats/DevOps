@@ -11,6 +11,7 @@ import { StorageServiceModule } from 'angular-webstorage-service';
 import { HeaderComponent } from './header/header.component';
 import { SearchComponent } from './search/search.component';
 import { CreateeventComponent } from './createevent/createevent.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CreateeventComponent } from './createevent/createevent.component';
     LoginComponent,
     HeaderComponent,
     SearchComponent,
-    CreateeventComponent
+    CreateeventComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

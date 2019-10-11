@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.model.User;
 import com.revature.model.UserLoginRequestModel;
+import com.revature.model.UserRole;
+import com.revature.model.UserSignupRequestModel;
 import com.revature.service.UserService;
 
 @CrossOrigin
@@ -35,5 +37,14 @@ public class UserController {
 		else {
 			return null;
 		}
+	}
+	
+	@PostMapping(value="/signup",consumes=MediaType.APPLICATION_JSON_VALUE)
+	public void signUp(@RequestBody UserSignupRequestModel signupRequest) {
+		User u = new User();
+		u.setUsername(signupRequest.getUsername());
+		u.setPassword(signupRequest.getPassword());
+		u.setUserrole(new UserRole(1,"User"));
+		userService.save(u);
 	}
 }
