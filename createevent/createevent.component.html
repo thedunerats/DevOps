@@ -1,5 +1,5 @@
 
-<div class="eventCreation" id = "eventForm">
+<div class="eventCreation" id = "event-Form" #eventForm="ngForm" (ngSubmit)="createEvent(eventForm)">
 <h3 class = "text-center">Submit a new event here!</h3>
     <form class = "container justify-content-center"> <!---Make a new event here. FIXME: Need to add actions to it.-->
         <div class = "row">	
